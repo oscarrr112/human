@@ -18,6 +18,7 @@
     <script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
     <script src="node_modules/three/examples/js/renderers/Projector.js"></script>
     <script src="node_modules/three/examples/js/Detector.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="node_modules/makehuman-js/dist/makehuman.js" charset="utf-8"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <script type="text/javascript">
@@ -49,8 +50,9 @@
     })
     .then(() => {
         // start the app
+        console.log(axios)
         resources.baseUrl = "node_modules/makehuman-data/public/data/"
-        app = new App(resources, modeling_sliders, language)
+        app = new App(resources, modeling_sliders, language, axios)
         app.init()
         app.animate()
     })

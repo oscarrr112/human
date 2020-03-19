@@ -2,14 +2,18 @@
 
 var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
 
-
+    let axios;
     /**
      * A three.js app that build a scene
      * @param       {object} resources        - list of resources from makehuman-data
      * @param       {object} modeling_sliders - list of modeling_sliders from makehuman-data
+     * @param language
+     * @param axi
      * @constructor
      */
-    function App(resources, modeling_sliders, language) {
+    function App(resources, modeling_sliders, language, axi) {
+
+        console.log(axios);
 
         this.SCREEN_WIDTH = window.innerWidth / 3 * 2;
         this.SCREEN_HEIGHT = window.innerHeight / 3 * 2;
@@ -38,7 +42,7 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
         this.resources = resources
         this.modeling_sliders = modeling_sliders
         this.language = language
-        console.log(this.language)
+        axios = axi;
     }
 
     App.prototype.init = function init() {
@@ -343,15 +347,33 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
 
     GUI.prototype.setupIOGUI = function () {
         this.save = function () {
-            let url = self.human.io.toUrl();
-            url.replace('"http://114.55.255.62:8081', '8080');
+            let model_url = self.human.io.toUrl();
+            model_url.replace('"http://114.55.255.62:8081', '8080');
             try {
-                toJs.save(url);
-                alert('保存成功')
+                let phone_number = document.URL.slice(27 + "PhoneNum=".length);
+                let url = 'http://47.101.147.32:8080/user/addmodel';
+                let data = {
+                    'data': {
+                        "PhoneNum": phone_number,
+                        "Model": model_url
+                    }
+                };
+                axios.get(url, {
+                    params: {
+                      data: data,
+                    }
+                  })
+                    .then(function (response) {
+                        alert('保存成功');
+                        console.log(response);
+                    }).catch(function (error) {
+                    alert('保存失败');
+                }).then(function () {});
             } catch (e) {
+                console.log(e);
                 alert('功能暂未开启哦');
             }
-        }
+        };
         this.gui.add(this, 'save');
     };
 
