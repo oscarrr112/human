@@ -347,6 +347,7 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
             url.replace('"http://114.55.255.62:8081', '8080');
             try {
                 toJs.save(url);
+                alert('保存成功')
             } catch (e) {
                 alert('功能暂未开启哦');
             }
