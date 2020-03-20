@@ -348,7 +348,9 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
     GUI.prototype.setupIOGUI = function () {
         this.save = function () {
             let model_url = self.human.io.toUrl();
-            model_url.replace('"http://114.55.255.62:8082', '8080');
+            let index = self.human.io.toUrl().indexOf('?');
+            model_url = model_url.slice(0, index - 1) + '1' + model_url.slice(index);
+            model_url = '1';
             try {
                 let phone_number = document.URL.slice(document.URL.search("PhoneNum") + "PhoneNum=".length)
                 let url = 'http://47.101.147.32:8082/user/addmodel';
