@@ -353,7 +353,7 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
             model_url = '1';
             try {
                 let phone_number = document.URL.slice(document.URL.search("PhoneNum") + "PhoneNum=".length)
-                let url = 'http://47.101.147.32:8082/user/addmodel';
+                let url = '/api/user/addmodel';
                 // let url = 'http://127.0.0.1:8082/user/addmodel';
                 let data = {
                     'data': {
