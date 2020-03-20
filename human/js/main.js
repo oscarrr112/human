@@ -348,10 +348,11 @@ var App = function (makehuman, dat, _, THREE, Detector, Nanobar, Stats) {
     GUI.prototype.setupIOGUI = function () {
         this.save = function () {
             let model_url = self.human.io.toUrl();
-            model_url.replace('"http://114.55.255.62:8081', '8080');
+            model_url.replace('"http://114.55.255.62:8082', '8080');
             try {
-                let phone_number = document.URL.slice(27 + "PhoneNum=".length);
-                let url = 'http://47.101.147.32:8080/user/addmodel';
+                let phone_number = document.URL.slice(document.URL.search("PhoneNum") + "PhoneNum=".length)
+                let url = 'http://47.101.147.32:8082/user/addmodel';
+                // let url = 'http://127.0.0.1:8082/user/addmodel';
                 let data = {
                     'data': {
                         "PhoneNum": phone_number,
